@@ -46,10 +46,11 @@ def front_x(words):
     for x in xList:
         words.remove(x)
     
-    xList.sorted()
-    words.sorted()
+    xList.sort()
+    words.sort()
+    xList.extend(words)
     
-    return xList.extend(words)
+    return xList
 
 
 # C. sort_last
@@ -59,9 +60,12 @@ def front_x(words):
 # [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
 # Hint: use a custom key= function to extract the last element form each tuple.
 def sort_last(tuples):
-  # +++your code here+++
-  return
+    # +++your code here+++
+    result = sorted(tuples, key=last_number)
+    return result
 
+def last_number(tup):
+    return tup[-1]
 
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
