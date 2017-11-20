@@ -47,6 +47,33 @@ import sys
 # Then print_words() and print_top() can just call the utility function.
 
 def print_words(filename):
+    wordMap = get_wordMap(filename)
+    keys = sorted(wordMap)
+    
+    for key in keys:
+        print key + " " + str(wordMap[key])
+    
+    return
+
+def print_top(filename):
+    wordMap = get_wordMap(filename)
+    wordTuple = wordMap.items()
+    
+    topCount = sorted(wordTuple, key=tuple_value, reverse=True)
+    
+    x = 0;
+    for top in topCount:
+        print top[0] + " " + str(top[1])
+        x += 1
+        if x == 20:
+            break
+    
+    return
+    
+def tuple_value(wordTuple):
+    return wordTuple[1]
+
+def get_wordMap(filename):
     f = open(filename, "rU")
     wordMap = {}
     for line in f:
@@ -61,12 +88,7 @@ def print_words(filename):
     
     f.close()
     
-    keys = sorted(wordMap)
-    
-    for key in keys:
-        print key + " " + str(wordMap[key])
-            
-    sys.exit(0);
+    return wordMap
 
 ###
 
