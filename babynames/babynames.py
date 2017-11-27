@@ -63,8 +63,8 @@ def extract_names(filename):
   
   for key, value in names.items():
     babies.append(key + " " + value)
-
-  return sorted(babies)
+  
+  return "\n".join(sorted(babies)) + "\n"
 
 
 def main():
@@ -90,13 +90,12 @@ def main():
     f = open(args[0] + ".summary", "w")
     babies = extract_names(args[0])
     for baby in babies:
-      f.write(baby + "\n")
+      f.write(baby)
     
     f.close()
   else:
     babies = extract_names(args[0])
-    for baby in babies:
-      print baby
+    print babies
   
 if __name__ == '__main__':
   main()
