@@ -23,10 +23,26 @@ def get_special_paths(dir):
     
     paths = []
     for filename in filenames:
-      paths.append(os.path.join(abspath, filename))
+      if not os.path.isdir(filename):
+        paths.append(os.path.join(abspath, filename))
     
-    return "\n".join(paths) + "\n"
+    return paths
 
+def copy_to(paths, dir):
+    if not os.path.exists(dir):
+      os.mkdir(dir)
+    
+    abspath = os.path.abspath(dir)
+    
+    for path in paths:
+      basename = os.path.basename(path)
+      shutil.copy(path, os.path.join(abspath, basename))
+      print "Copying..."
+      print path
+      print "to..."
+      print os.path.join(abspath, basename)
+      
+    return
 
 def main():
   # This basic command line argument parsing code is provided.
@@ -59,7 +75,13 @@ def main():
   # +++your code here+++
   # Call your functions
   files = get_special_paths(args[0])
-  print files
+  
+  if todir:
+    copy_to(files, todir)
+  elif tozip:
+    sys.exit(1)
+  else:    
+    print "\n".join(files) + "\n"
   
 if __name__ == "__main__":
   main()
