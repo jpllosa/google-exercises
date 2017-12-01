@@ -49,7 +49,27 @@ def download_images(img_urls, dest_dir):
   Creates the directory if necessary.
   """
   # +++your code here+++
+  if not os.path.exists(dest_dir):
+    os.mkdir(dest_dir)
+    
+  html = open(dest_dir + "/index.html", "w")
+  html.write("<html>\n")
+  html.write("<body>\n")
+  i = 0
+  for imgUrl in img_urls:
+    img_name = "img" + str(i)
+    img_path = dest_dir + "/" + img_name
+    print "Retrieving... " + imgUrl
+    urllib.urlretrieve(imgUrl, img_name)
+    html.write("<img src=\"" + img_name + "\">")
+    i += 1
+
+  html.write("\n</html>\n")
+  html.write("</body>\n")
   
+  html.close()
+    
+  return
 
 def main():
   args = sys.argv[1:]
