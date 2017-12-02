@@ -37,8 +37,21 @@ def read_urls(filename):
     pUrl = puzzleUrl.split()
     uniqueUrls["http://" + fileNameSplit[1] + pUrl[1]] = "http://" + fileNameSplit[1] + pUrl[1]
 
-  return sorted(uniqueUrls.keys())
-  
+  return sorted(uniqueUrls.keys(), key=second_word)
+
+# solution to part a and part b exercises
+#   return sorted(uniqueUrls.keys())
+
+def second_word(url):
+  match = re.search(r"-(\w*.jpg)", url)
+  if match:
+    s = match.group(1)
+  else:
+    s = "no match"
+
+  return s
+
+    
 
 def download_images(img_urls, dest_dir):
   """Given the urls already in the correct order, downloads
@@ -60,7 +73,7 @@ def download_images(img_urls, dest_dir):
     img_name = "img" + str(i)
     img_path = dest_dir + "/" + img_name
     print "Retrieving... " + imgUrl
-    urllib.urlretrieve(imgUrl, img_name)
+    urllib.urlretrieve(imgUrl, img_path)
     html.write("<img src=\"" + img_name + "\">")
     i += 1
 
