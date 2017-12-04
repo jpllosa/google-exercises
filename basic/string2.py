@@ -38,7 +38,15 @@ def verbing(s):
 # This dinner is good!
 def not_bad(s):
   # +++your code here+++
-  return
+  notIndex = s.find('not')
+  badIndex = s.find('bad')
+  if badIndex > notIndex:
+    prefix = s[:notIndex]
+    suffix = s[badIndex + 3:]
+    result = prefix + 'good' + suffix
+    return result
+
+  return s
 
 
 # F. front_back
