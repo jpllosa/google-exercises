@@ -58,7 +58,17 @@ def not_bad(s):
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
   # +++your code here+++
-  return
+  aLength = len(a)
+  bLength = len(b)
+  
+  if aLength % 2 != 0:
+    aLength += 1
+
+  if bLength % 2 != 0:
+    bLength += 1
+  
+  result = a[:aLength / 2] + b[:bLength / 2] + a[aLength / 2:] + b[bLength / 2:]
+  return result
 
 
 # Simple provided test() function used in main() to print
